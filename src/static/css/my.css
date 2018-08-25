@@ -1,0 +1,42 @@
+.card {
+    width: 20rem;
+    border-style: solid;
+    margin: auto;
+}
+
+.card-title {
+    color: limegreen;
+    padding-bottom: 10px;
+    border-bottom: 2px solid cornflowerblue;
+}
+
+.hash-title {
+    color: limegreen;
+    padding-bottom: 40px;
+    font-size: 20px;
+}
+.mature-title {
+    color: limegreen;
+    font-size: 20px;
+}
+
+.card-value {
+    color: gray;
+}
+
+.function-title {
+    color: cornflowerblue;
+}
+
+.block-info-title {
+    font-size: 18px;
+}
+
+.block-info-text {
+    padding-top: 4px;
+    font-size: 16px;
+}
+.miner-tx-info{
+    padding-left:25px;
+}
+

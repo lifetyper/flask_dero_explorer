@@ -1,0 +1,43 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/my.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/flaticon.css') }}">
+{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static',filename='img/favicon.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static',filename='img/favicon.png') }}" type="image/x-icon">
+{% endblock %}
+
+{% block navbar %}
+    <div class="navbr navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/"><span class="flaticon-compass-with-white-needles"></span>Dero Explorer</a>
+            </div>
+            <div class="navbar-form navbar-right">
+                <form class="form-inline" method="POST" action="/">
+                    {{ form.csrf_token }}
+                    {{ form.search_content(size=50,placeholder="Transaction Hash,Block Hash,Block Height",class="form-control") }}
+                    <input type="submit" class="btn btn-primary" value="Search">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block body %}
+    {{ super() }}
+    {% block footer %}
+        <div class="navbr navbar-inverse navbar-fixed-bottom" role="navigation">
+            <div class="container text-center">
+                <a class="links" href="https://lifetyper.com">A LifeTyper Product</a>
+            </div>
+        </div>
+    {% endblock %}
+{% endblock %}

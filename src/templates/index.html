@@ -1,0 +1,83 @@
+{% extends "mybase.html" %}
+
+{% block title %}Dero Explorer{% endblock %}
+
+{% block content %}
+    <div class="container text-center">
+        <div class="page-header function-title">
+            <h3><span class="flaticon-analytics"></span>Network Status</h3>
+        </div>
+        <div class="contents">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="card well">
+                        <div class="card-body">
+                            <h4 class="card-title"><span class="flaticon-calculator"></span>Difficulty</h4>
+                            <h4 class="card-value">{{ network_data.difficulty }}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card well">
+                        <div class="card-body">
+                            <h4 class="card-title"><span class="flaticon-open-window-with-height-adjustment"></span>Block
+                                Height</h4>
+                            <h4 class="card-value">{{ network_data.topo_height }}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card well">
+                        <div class="card-body">
+                            <h4 class="card-title"><span class="flaticon-time-left"></span>Block Time</h4>
+                            <h4 class="card-value">{{ network_data.block_time }} Seconds</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card well">
+                        <div class="card-body">
+                            <h4 class="card-title"><span class="flaticon-hash-key"></span>Hash Rate</h4>
+                            <h4 class="card-value">{{ network_data.hash_rate }} MH/s</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="container text-center">
+        <div class="page-header function-title">
+            <h3><span class="flaticon-transaction"></span>Recent Blocks</h3>
+        </div>
+        <div class="contents">
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <td class="block-info-title">Height</td>
+                    <td class="block-info-title">Topo Height</td>
+                    <td class="block-info-title">Timestamp (UTC)</td>
+                    <td class="block-info-title">Block Size</td>
+                    <td class="block-info-title">Tx Count</td>
+                    <td class="block-info-title">Block Hash</td>
+                </tr>
+
+                {% for item in block_list %}
+                    <tr>
+                        <td>{{ item.height }}</td>
+                        <td><a href="/block/{{ item.topo_height }}">{{ item.topo_height }}</a></td>
+                        <td>{{ item.time }}</td>
+                        <td>{{ item.size }} KB</td>
+                        <td>{{ item.tx_count }}</td>
+                        <td><a href="/block/{{ item.block_hash }}">{{ item.block_hash }}</a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+
+            </table>
+
+            <br>
+        </div>
+    </div>
+{% endblock %}

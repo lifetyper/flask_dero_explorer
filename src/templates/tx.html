@@ -1,0 +1,128 @@
+{% extends "mybase.html" %}
+
+{% block title %}Transaction Information{% endblock %}
+
+{% block content %}
+    <div class="container text-center">
+        <div class="page-header function-title">
+            <h3><span class="flaticon-analytics"></span>Network Status</h3>
+        </div>
+        <div class="contents">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="card well">
+                        <div class="card-body">
+                            <h4 class="card-title"><span class="flaticon-calculator"></span>Difficulty</h4>
+                            <h4 class="card-value">{{ network_data.difficulty }}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card well">
+                        <div class="card-body">
+                            <h4 class="card-title"><span class="flaticon-open-window-with-height-adjustment"></span>Block
+                                Height</h4>
+                            <h4 class="card-value">{{ network_data.topo_height }}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card well">
+                        <div class="card-body">
+                            <h4 class="card-title"><span class="flaticon-time-left"></span>Block Time</h4>
+                            <h4 class="card-value">{{ network_data.block_time }} Seconds</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card well">
+                        <div class="card-body">
+                            <h4 class="card-title"><span class="flaticon-hash-key"></span>Hash Rate</h4>
+                            <h4 class="card-value">{{ network_data.hash_rate }} MH/s</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container text-center">
+    <div class="page-header function-title">
+        <h3><span class="flaticon-blockchain"></span>Transaction Information</h3>
+    </div>
+    <div class="contents text-left">
+        <div class="col-lg-12" style="text-overflow: ellipsis; overflow-x:hidden;">
+            <h3 class="page-header hash-title">
+                <i class="flaticon-transaction"></i>
+                Transaction
+                <i class="flaticon-horizontal-resize"></i>
+                <span class="text-muted">{{ tx_hash }}</span>
+            </h3>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped" role="progressbar"
+                         style="width: {{ percent }}%"
+                         aria-valuenow="{{ percent }}" aria-valuemin="0" aria-valuemax="100">{{ percent }}%
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <ul class="list-group">
+                    <li class="list-group-item"><i class="flaticon-open-window-with-height-adjustment"></i><span
+                            class="block-info-title">Included Height</span>
+                        <a href="/block/{{ tx_info.block_height }}">
+                            <span class="text-muted  pull-right block-info-text">{{ tx_info.block_height }}</span>
+                        </a>
+                    </li>
+
+                    <li class="list-group-item"><i class="flaticon-time-left"></i><span class="block-info-title">Unlocked</span>
+                        <a href="/block/{{ unlocked_height }}">
+                            <span class="text-muted  pull-right block-info-text">{{ unlocked_height }}</span>
+                        </a>
+                    </li>
+
+                    <li class="list-group-item"><i class="flaticon-money"></i><span
+                            class="block-info-title">Reward</span>
+                        <span class="text-muted  pull-right block-info-text">{{ tx_info.reward }}</span>
+                    </li>
+                    <li class="list-group-item"><i class="flaticon-rgb"></i><span
+                            class="block-info-title">Mixin</span>
+                        <span class="text-muted  pull-right block-info-text">{{ tx_info.ring_count }}</span>
+                    </li>
+
+
+                </ul>
+            </div>
+            <div class="col-sm-6">
+                <ul class="list-group">
+                    <li class="list-group-item"><i class="flaticon-accepted-notes"></i><span
+                            class="block-info-title">Confirmation</span>
+                        <span class="text-muted  pull-right block-info-text">{{ block_data.depth }}</span>
+                    </li>
+
+                    <li class="list-group-item"><i class="flaticon-passage-of-time"></i><span
+                            class="block-info-title">TimeStamp</span>
+                        <span class="text-muted  pull-right block-info-text">{{ block_data.time }} (UTC)</span>
+                    </li>
+                    <li class="list-group-item"><i class="flaticon-save"></i><span
+                            class="block-info-title">Size</span>
+                        <span class="text-muted  pull-right block-info-text">{{ tx_info.size }} KB</span>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <br>
+
+    </div>
+
+{% endblock %}

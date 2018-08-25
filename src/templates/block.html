@@ -1,0 +1,176 @@
+{% extends "mybase.html" %}
+
+{% block title %}Block Information{% endblock %}
+
+{% block content %}
+    <div class="container text-center">
+        <div class="page-header function-title">
+            <h3><span class="flaticon-analytics"></span>Network Status</h3>
+        </div>
+        <div class="contents">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="card well">
+                        <div class="card-body">
+                            <h4 class="card-title"><span class="flaticon-calculator"></span>Difficulty</h4>
+                            <h4 class="card-value">{{ network_data.difficulty }}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card well">
+                        <div class="card-body">
+                            <h4 class="card-title"><span class="flaticon-open-window-with-height-adjustment"></span>Block
+                                Height</h4>
+                            <h4 class="card-value">{{ network_data.topo_height }}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card well">
+                        <div class="card-body">
+                            <h4 class="card-title"><span class="flaticon-time-left"></span>Block Time</h4>
+                            <h4 class="card-value">{{ network_data.block_time }} Seconds</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card well">
+                        <div class="card-body">
+                            <h4 class="card-title"><span class="flaticon-hash-key"></span>Hash Rate</h4>
+                            <h4 class="card-value">{{ network_data.hash_rate }} MH/s</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container text-center">
+        <div class="page-header function-title">
+            <h3><span class="flaticon-blockchain"></span>Block Information</h3>
+        </div>
+        <div class="contents text-left">
+            <div class="col-lg-12" style="text-overflow: ellipsis; overflow-x:hidden;">
+                <h3 class="page-header hash-title">
+                    <i class="flaticon-cube-variant-with-shadow"></i>
+                    Block
+                    <a href="/block/{{ pre_block }}">
+                        <i class="flaticon-left-arrow-angle"></i>
+                    </a>
+                    <i>{{ block_info.topo_height }}</i>
+                    <a href="/block/{{ next_block }}">
+                        <i class="flaticon-keyboard-right-arrow-button"></i>
+                    </a>
+                    <span class="text-muted">{{ block_info.block_hash }}</span>
+                </h3>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <ul class="list-group">
+                        <li class="list-group-item"><i class="flaticon-open-window-with-height-adjustment"></i><span
+                                class="block-info-title">Height</span>
+                            <span class="text-muted  pull-right block-info-text">{{ block_info.height }}</span></li>
+                        <li class="list-group-item"><i class="flaticon-height"></i><span class="block-info-title">Topo Height</span>
+                            <span class="text-muted  pull-right block-info-text">{{ block_info.topo_height }}</span>
+                        </li>
+                        <li class="list-group-item"><i class="flaticon-time-left"></i><span class="block-info-title">Depth</span>
+                            <span class="text-muted  pull-right block-info-text">{{ block_info.depth }}</span></li>
+                        <li class="list-group-item"><i class="flaticon-calculator"></i><span class="block-info-title">Difficulty</span>
+                            <span class="text-muted  pull-right block-info-text">{{ block_info.block_difficulty }}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="list-group">
+                        <li class="list-group-item"><i class="flaticon-passage-of-time"></i><span
+                                class="block-info-title">Timestamp</span>
+                            <span class="text-muted  pull-right block-info-text">{{ block_info.time }} UTC</span></li>
+                        <li class="list-group-item"><i class="flaticon-horizontal-resize"></i><span
+                                class="block-info-title">BlockSize</span>
+                            <span class="text-muted  pull-right block-info-text">{{ block_info.size }} KB</span></li>
+                        <li class="list-group-item"><i class="flaticon-transaction"></i><span class="block-info-title">Transactions</span>
+                            <span class="text-muted  pull-right block-info-text">{{ block_info.tx_count }}</span></li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading large">
+                            Miner Reward Transaction
+                        </div>
+                    </div>
+                    <div class="panel panel-default panel-table">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-2 col-sm-6 col-md-7 block-info-title flaticon-keyword">Key</div>
+                                <div class="col-xs-6 col-sm-3 col-md-3 block-info-title flaticon-money">Reward</div>
+                                <div class="col-xs-1 col-sm-1 col-md-2 block-info-title flaticon-open-padlock-silhouette">Unlock Height</div>
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="row show-grid top-row">
+                                <div class="col-xs-2 col-sm-6 col-md-7 miner-tx-info">
+                                 {{ block_info.miner_tx.Vout[0].Target.Key }}
+                                </div>
+                                <div class="col-xs-6 col-sm-3 col-md-3 miner-tx-info">
+                                      {{ block_info.miner_reward }}
+                                </div>
+                                <div class="col-xs-1 col-sm-1 col-md-2 miner-tx-info">{{ block_info.miner_tx.unlock_time }}</div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading large">
+                            Transactions ({{ block_info.tx_count }})
+                        </div>
+                    </div>
+                    <div class="panel panel-default panel-table">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-2 col-sm-5 col-md-7 block-info-title flaticon-keyword">Hash</div>
+                                <div class="col-xs-5 col-sm-3 col-md-3 block-info-title flaticon-money">Output</div>
+                                <div class="col-xs-2 col-sm-1 col-md-2 block-info-title flaticon-save">Size</div>
+                            </div>
+                        </div>
+                        {% for hash,size in block_info.hash_size_list %}
+                            <div class="panel-body">
+
+                                <div class="row show-grid top-row">
+                                    <a href="/tx/{{ hash }}">
+                                        <div class="col-xs-2 col-sm-5 col-md-7 miner-tx-info">
+                                            {{ hash }}
+                                        </div>
+                                    </a>
+                                    <div class="col-xs-5 col-sm-3 col-md-3 miner-tx-info"><i
+                                            class="flaticon-closed-briefcase-silhouette"></i>&nbsp;Secret
+                                    </div>
+                                    <div class="col-xs-2 col-sm-1 col-md-2 miner-tx-info">{{ size }} KB</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+
+
+            <br>
+        </div>
+    </div>
+
+
+{% endblock %}
