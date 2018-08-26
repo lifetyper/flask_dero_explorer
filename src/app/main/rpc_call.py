@@ -52,7 +52,7 @@ def load_tx_info(tx_hash):
         return False, None
 
 
-def load_block_info(height_hash):
+def load_block_info(height_hash, fetch_size=True):
     block_data = dict()
     logging.getLogger('jsonrpcclient').setLevel(logging.ERROR)
     client = HTTPClient("http://127.0.0.1:20206/json_rpc")
@@ -80,7 +80,7 @@ def load_block_info(height_hash):
     block_data['tx_hashes'] = json_data['tx_hashes']
     block_data['size'] = 0
     block_data['tx_size_list'] = list()
-    if block_data['tx_hashes']:
+    if block_data['tx_hashes'] and fetch_size:
         block_data['tx_count'] = len(block_data['tx_hashes'])
         for tx in block_data['tx_hashes']:
             _, tx_data = load_tx_info(tx)

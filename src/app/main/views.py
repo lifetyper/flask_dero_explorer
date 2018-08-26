@@ -64,7 +64,7 @@ def tx(tx_hash):
     network_data = get_info()
     valid_tx, tx_info = load_tx_info(tx_hash)
     if valid_tx:
-        _, block_data = load_block_info(tx_info['block_height'])
+        _, block_data = load_block_info(tx_info['block_height'], fetch_size=False)
         if tx_info['reward'] > 0:
             mature_require = 60
         else:
