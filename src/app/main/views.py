@@ -26,7 +26,6 @@ def search_redirect(form):
             block_valid, block_data = load_block_info(input_hash)
             if block_valid:
                 return True, '/block/{}'.format(input_hash)
-
     return False, None
 
 

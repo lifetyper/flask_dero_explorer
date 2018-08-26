@@ -9,11 +9,12 @@ from datetime import datetime
 
 
 def get_info():
+    logging.getLogger('jsonrpcclient').setLevel(logging.ERROR)
+
     client = HTTPClient("http://127.0.0.1:20206/json_rpc")
     network_data = dict()
     try:
         response = client.send(Request("get_info")).data.result
-        print(response)
         network_data['difficulty'] = response['difficulty']
         network_data['height'] = response['height']
         network_data['topo_height'] = response['topoheight']
@@ -53,6 +54,7 @@ def load_tx_info(tx_hash):
 
 def load_block_info(height_hash):
     block_data = dict()
+    logging.getLogger('jsonrpcclient').setLevel(logging.ERROR)
     client = HTTPClient("http://127.0.0.1:20206/json_rpc")
     height_hash = str(height_hash)
     try:
@@ -90,14 +92,3 @@ def load_block_info(height_hash):
         block_data['tx_count'] = 0
 
     return True, block_data
-
-
-miner_tx = '381fc10ad97cdfa1dac9fcad52cb3a56b0c538e2e48ee8312bba130ffd848f7b'
-normal_tx = '7af20789a735acbb53fb7289becbd89eec915ff2a466b049c251372c3b919643'
-
-block_hash = '7a71fe371ebabf814abd173c27c586d7723054fdc91df373082d0028f6616201'
-fake_hash = '3a71fe371ebabf814abd173c27c586d7723054fdc91df373082d0028f6616201'
-block_height = 784128
-
-# print(load_tx_info(normal_tx))
-# print(load_block_info(block_height))
